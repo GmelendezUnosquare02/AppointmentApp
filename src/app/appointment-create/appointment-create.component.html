@@ -1,0 +1,35 @@
+<div class="appointment-form">
+    <h2>Create New Appointment</h2>
+    <form [formGroup]="appointmentForm" (ngSubmit)="createAppointment()">
+      
+      <!-- Title Field -->
+      <mat-form-field appearance="fill">
+        <mat-label>Title</mat-label>
+        <input matInput formControlName="title" required />
+        <mat-error *ngIf="appointmentForm.get('title')?.hasError('required')">
+          Title is required
+        </mat-error>
+        <mat-error *ngIf="appointmentForm.get('title')?.hasError('minlength')">
+          Title must be at least 3 characters long
+        </mat-error>
+      </mat-form-field>
+  
+      <!-- Date Field -->
+      <mat-form-field appearance="fill">
+        <mat-label>Date</mat-label>
+        <input matInput formControlName="date" type="datetime-local" required />
+        <mat-error *ngIf="appointmentForm.get('date')?.hasError('required')">
+          Date is required
+        </mat-error>
+        <mat-error *ngIf="appointmentForm.get('date')?.hasError('invalidDate')">
+          Date must be in the future
+        </mat-error>
+      </mat-form-field>
+  
+      <!-- Submit Button -->
+      <button mat-raised-button color="primary" type="submit" [disabled]="appointmentForm.invalid">
+        Create Appointment
+      </button>
+    </form>
+  </div>
+  
